@@ -17,6 +17,7 @@ on:
 jobs:
   node-build:
     runs-on: [self-hosted, wsl1]
+    environment: ${{github.ref=='refs/heads/main' && 'prod' || 'develop'}}
     strategy:
       matrix:
         node-version: [18, 20]
