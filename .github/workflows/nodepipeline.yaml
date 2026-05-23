@@ -17,6 +17,9 @@ on:
 jobs:
   node-build:
     runs-on: [self-hosted, wsl1]
+    strategy:
+      matrix:
+        node-version: [18, 20]
 
     steps:
       - name: Checkout code
@@ -25,7 +28,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: ${{matrix.node-version}}
 
       - name: Install dependencies
         run: npm install
@@ -38,4 +41,9 @@ jobs:
           echo "APP=${{secrets.PROD_APP}}" >> .env.production
           
       - name: Run application
-        run: node server.js ${{github.event.inputs.environment}}
+        run: |
+          node server.js ${{github.event.inputs.environment}}
+          sleep 5
+          curl http://localhost:8080/
+          curl http://localhost:8080/health
+          kill -f "node server.js"
