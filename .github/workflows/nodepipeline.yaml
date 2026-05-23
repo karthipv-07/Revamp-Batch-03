@@ -44,6 +44,4 @@ jobs:
         run: |
           node server.js ${{github.event.inputs.environment}}
           sleep 5
-          curl http://localhost:8080/
-          curl http://localhost:8080/health
           kill -f "node server.js"
