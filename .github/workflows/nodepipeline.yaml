@@ -1,0 +1,41 @@
+name: Node pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose environment"
+        required: true
+        default: "development"
+        type: choice
+        options:
+          - development
+          - production
+  # push:
+  #   branches: ["main"]
+
+jobs:
+  node-build:
+    runs-on: [self-hosted, wsl1]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create env file
+        run: |
+          echo "PORT=${{vars.DEV_PORT}}" >> .env.development
+          echo "APP=${{secrets.DEV_APP}}" >> .env.development
+          echo "PORT=${{vars.PROD_PORT}}" >> .env.production
+          echo "APP=${{secrets.PROD_APP}}" >> .env.production
+          
+      - name: Run application
+        run: node server.js ${{github.event.inputs.environment}}
