@@ -1,0 +1,34 @@
+name: Docker Build and Push
+
+inputs:
+  username:
+    description: DockerHub username
+    required: true
+  password:
+    description: DockerHub password
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Login to Docker
+      uses: docker/login-action@v4
+      with:
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+
+    - name: Build Docker image
+      shell: bash
+      run: docker build -f Dockerfile-distroless -t dockerfile-distroless .
+
+    - name: Set Docker tag
+      shell: bash
+      run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+    - name: Tag Docker image
+      shell: bash
+      run: docker tag dockerfile-distroless ${{ inputs.username }}/nodeapp2:${{ env.SHORT_SHA }}
+
+    - name: Push image
+      shell: bash
+      run: docker push ${{ inputs.username }}/nodeapp2:${{ env.SHORT_SHA }}
