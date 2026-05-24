@@ -19,7 +19,7 @@ runs:
 
     - name: Build Docker image
       shell: bash
-      run: docker build -f Dockerfile-distroless -t dockerfile-distroless .
+      run: docker build -f Dockerfile.distroless -t dockerfile-distroless .
 
     - name: Set Docker tag
       shell: bash
@@ -27,8 +27,8 @@ runs:
 
     - name: Tag Docker image
       shell: bash
-      run: docker tag dockerfile-distroless ${{ inputs.username }}/nodeapp2:${{ env.SHORT_SHA }}
+      run: docker tag dockerfile-distroless ${{ inputs.username }}/nodeapp3:${{ env.SHORT_SHA }}
 
     - name: Push image
       shell: bash
-      run: docker push ${{ inputs.username }}/nodeapp2:${{ env.SHORT_SHA }}
+      run: docker push ${{ inputs.username }}/nodeapp3:${{ env.SHORT_SHA }}
