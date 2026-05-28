@@ -1,1 +1,14 @@
 This is a sample log file
+[2026-05-27T08:53:14.414Z] [DEVELOPMENT] Server running on port undefined
+[2026-05-27T08:55:15.190Z] [DEVELOPMENT] Server running on port 3003
+[2026-05-27T08:55:24.629Z] [DEVELOPMENT] GET / called
+[2026-05-27T08:55:24.629Z] [DEVELOPMENT] Application endpoint hit
+[2026-05-27T08:55:24.655Z] [DEVELOPMENT] GET /favicon.ico called
+[2026-05-27T08:55:52.876Z] [DEVELOPMENT] GET / called
+[2026-05-27T08:55:52.876Z] [DEVELOPMENT] Application endpoint hit
+[2026-05-27T08:56:03.102Z] [DEVELOPMENT] GET /health called
+[2026-05-27T08:56:03.102Z] [DEVELOPMENT] Health check called
+[2026-05-27T09:12:03.983Z] [DEVELOPMENT] GET / called
+[2026-05-27T09:12:03.983Z] [DEVELOPMENT] Application endpoint hit
+[2026-05-27T09:12:04.904Z] [DEVELOPMENT] GET / called
+[2026-05-27T09:12:04.904Z] [DEVELOPMENT] Application endpoint hit
