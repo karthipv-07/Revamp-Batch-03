@@ -1,5 +1,3 @@
 node_modules/
 .scannerwork/
-logs/
 *.zip
-.env*
